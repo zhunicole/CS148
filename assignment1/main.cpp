@@ -12,7 +12,24 @@
 
 int win_width = 512;
 int win_height = 512;
-int draw_mode=3;
+int draw_mode=8;
+
+
+//draws the branch using triangle strips
+//creates width of strip by offseting y' from y by width
+void drawBranch(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2, float width) {
+    glBegin(GL_TRIANGLE_STRIP);
+    
+    glColor3f(0.f,1.f,0.f);
+    glVertex2f(x1, y1);
+    glVertex2f(x1, y1 + width);
+    glVertex2f(x2, y2);
+    glVertex2f(x2, y2+width);
+    
+    glEnd();
+    
+}
+
 
 // callback everytime things need to be redrawn
 void display( void )
@@ -20,198 +37,25 @@ void display( void )
     glClearColor(1.0, 1.0, 1.0, 1.0);   //sets clear color
     glClearDepth(1.0);  //? what is depth
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //sets window to clear color
+    
+    
+    //need to call these before any projection tranformations
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     
-    switch(draw_mode){
-        case 1:// Draw a point
-            glPointSize(8.); //default is 1.0
-            glColor3f(1.f,0.f,0.f);  //sets color for drawing objs
-            glBegin(GL_POINTS);
-            glVertex3f(0.4f,0.4f,0.f);
-            glEnd();
-            break;
-            
-        case 2:// Draw a line
-            glLineWidth(4.); //default is 1.0
-            glColor3f(0.f,1.f,0.f);
-            glBegin(GL_LINES);
-            glVertex3f(0.3f,0.3f,0.f);
-            glVertex3f(0.6f,0.6f,0.f);
-            glEnd();
-            break;
-            
-        case 3:// Draw a triangle
-            glColor3f(0.f,0.f,1.f);
-            glBegin(GL_TRIANGLES);
-            glVertex3f(0.2f,0.1f,0.f);
-            glVertex3f(0.4f,0.1f,0.f);
-            glVertex3f(0.3f,0.2f,0.f);
-            glEnd();
-            break;
-            
-        case 4:// Draw a quad
-            glColor3f(1.f,1.f,0.f);
-            glBegin(GL_QUADS);
-            glVertex3f(0.6f,0.7f,0.f);
-            glVertex3f(0.8f,0.7f,0.f);
-            glVertex3f(0.8f,0.9f,0.f);
-            glVertex3f(0.6f,0.9f,0.f);
-            glEnd();
-            break;
-            
-        case 5:// Draw a polygon
-            glColor3f(1.f,0.f,1.f);
-            glBegin(GL_POLYGON);
-            glVertex3f(0.6f,0.7f,0.f);
-            glVertex3f(0.8f,0.9f,0.f);
-            glVertex3f(0.9f,0.7f,0.f);
-            glVertex3f(0.8f,0.8f,0.f);
-            glVertex3f(0.6f,0.9f,0.f);
-            glEnd();
-            break;
-            
-        case 6://triangle strip
-            glLoadIdentity();
-            glBegin(GL_TRIANGLE_STRIP);
-            
-            glColor3f(1.f,0.f,0.f);
-            glVertex2f(0.2f,0.2f);
-            
-            glColor3f(0.f,1.f,0.f);
-            glVertex2f(0.2f,0.8f);
-            
-            glColor3f(0.f,0.f,1.f);
-            glVertex2f(0.5f,0.2f);
-            
-            glColor3f(1.f,1.f,0.f);
-            glVertex2f(0.5f,0.8f);
-            
-            glColor3f(0.f,1.f,1.f);
-            glVertex2f(0.8f,0.2f);
-            
-            glColor3f(1.f,0.f,1.f);
-            glVertex2f(0.8f,0.8f);
-            
-            glEnd();
-            break;
-            
-        case 7://use transforms
-            
-            glLineWidth(4.);
-            glLoadIdentity();
-            
-            //body
-            glPushMatrix(); //push identity
-            glTranslatef(0.5f,0.75f,0.f);
-            glBegin(GL_LINES);
-            glColor3f(1.f,1.f,1.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            //right arm
-            glPushMatrix(); //push body transform
-            glRotatef(35.f,0.f,0.f,1.f);
-            glBegin(GL_LINES);
-            glColor3f(1.f,0.f,0.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            //right forearm
-            glPushMatrix(); //push right arm transform
-            glTranslatef(0.f,-0.25f,0.f);
-            glRotatef(-15.f,0.f,0.f,1.f);
-            glBegin(GL_LINES);
-            glColor3f(0.f,1.f,0.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            glPopMatrix(); //load right arm transform
-            glPopMatrix(); //load body transform
-            
-            //left arm
-            glPushMatrix(); //push body transform
-            glRotatef(-35.f,0.f,0.f,1.f);
-            glBegin(GL_LINES);
-            glColor3f(1.f,0.f,0.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            //left forearm
-            glPushMatrix(); //push left arm transform
-            glTranslatef(0.f,-0.25f,0.f);
-            glRotatef(15.f,0.f,0.f,1.f);
-            glBegin(GL_LINES);
-            glColor3f(0.f,1.f,0.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            glPopMatrix(); //load left arm transform
-            glPopMatrix(); //load body transform
-            
-            //right leg
-            glPushMatrix(); //push body transform
-            glTranslatef(0.f,-0.25f,0.f);
-            glRotatef(25.f,0.f,0.f,1.f);
-            glBegin(GL_LINES);
-            glColor3f(0.f,0.f,1.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            //right lower leg
-            glPushMatrix(); //push right leg transform
-            glTranslatef(0.f,-0.25f,0.f);
-            glRotatef(-15.f,0.f,0.f,1.f);
-            glBegin(GL_LINES);
-            glColor3f(1.f,1.f,0.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            glPopMatrix(); //load right leg transform
-            glPopMatrix(); //load body transform
-            
-            //left leg
-            glPushMatrix(); //push body transform
-            glTranslatef(0.f,-0.25f,0.f);
-            glRotatef(-25.f,0.f,0.f,1.f);
-            glBegin(GL_LINES);
-            glColor3f(0.f,0.f,1.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            //left lower leg
-            glPushMatrix(); //push left leg transform
-            glTranslatef(0.f,-0.25f,0.f);
-            glRotatef(15.f,0.f,0.f,1.f);
-            glBegin(GL_LINES);
-            glColor3f(1.f,1.f,0.f);
-            glVertex3f(0.0f,0.0f,0.f);
-            glVertex3f(0.0f,-0.25f,0.f);
-            glEnd();
-            
-            glPopMatrix(); //load left leg transform
-            glPopMatrix(); //load body transform
-            
-            glBegin(GL_TRIANGLES);
-            glColor3f(1.f,1.f,1.f);
-            glVertex3f(-0.1f,0.f,0.f);
-            glVertex3f(0.1f,0.f,0.f);
-            glVertex3f(0.f,0.15f,0.f);
-            glEnd();
-            
-            break;
-    }
+    
+    //keyboard input changes things
+    //drawn using triangle strips
+    glLineWidth(4.);
+    glLoadIdentity();  //clear the currently modifiable matrix for future transformation commands
+    
+    drawBranch(0.2f, 0.2f, 0.5f, 0.5f, 0.01f);
+    
+    
     
     glutSwapBuffers();
 }
+
 
 // new rendering canvas, define new coord system
 void reshape( int w, int h )
@@ -242,6 +86,10 @@ void keyboard( unsigned char key, int x, int y ) {
         case '5':
         case '6':
         case '7':
+            draw_mode=key-'0';
+            glutPostRedisplay();
+            break;
+        case '8':
             draw_mode=key-'0';
             glutPostRedisplay();
             break;
