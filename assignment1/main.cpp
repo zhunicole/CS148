@@ -1,5 +1,7 @@
 #include <stdlib.h>
-
+#include <stdio.h>
+//#include <Foundation/Foundation.h>
+#include <math.h>
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -12,22 +14,60 @@
 
 int win_width = 512;
 int win_height = 512;
-int draw_mode=8;
+int num_branches = 2;
 
+#define BRANCH_DECREASE 0.8;
+#define ANGLE 0.2;
 
 //draws the branch using triangle strips
 //creates width of strip by offseting y' from y by width
-void drawBranch(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2, float width) {
+void drawBranch(float length, float width) {
+    glPushMatrix();
+
     glBegin(GL_TRIANGLE_STRIP);
-    
+
     glColor3f(0.f,1.f,0.f);
-    glVertex2f(x1, y1);
-    glVertex2f(x1, y1 + width);
-    glVertex2f(x2, y2);
-    glVertex2f(x2, y2+width);
-    
+    glVertex2f(0.f, 0.f);
+    glVertex2f(0.f, 0.f + length);
+    glVertex2f(0.f + width, 0.f);
+    glVertex2f(0.f + width, 0.f + length);
     glEnd();
+    glPopMatrix();
     
+    printf("drew");
+}
+
+
+//x and y updates with movement
+
+void tree(float length, int depth)
+{
+    if (length <0.001 || depth < 0) {
+        return;
+    } else {
+        float angle;
+        // Draw
+  
+        glPushMatrix();
+//        glRotatef(-90, 1.0,0.0,0.0);
+        drawBranch(length, 0.01f);
+        glPopMatrix();
+        
+        glTranslatef(0.0, length, 0.0);
+        
+        length = length * BRANCH_DECREASE;
+        depth = depth - 1;
+        //drawing 3 sets branches
+        for(int a= 0; a<3; a++){
+            angle = rand()%50+20;
+            if(angle >48) angle = -(rand()%50+20);
+            glPushMatrix();
+            glRotatef(angle,1,0.0,1);
+            tree(length, depth);
+            glPopMatrix();
+
+        }
+    }
 }
 
 
@@ -38,20 +78,15 @@ void display( void )
     glClearDepth(1.0);  //? what is depth
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //sets window to clear color
     
-    
     //need to call these before any projection tranformations
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     
-    
-    //keyboard input changes things
-    //drawn using triangle strips
-    glLineWidth(4.);
-    glLoadIdentity();  //clear the currently modifiable matrix for future transformation commands
-    
-    drawBranch(0.2f, 0.2f, 0.5f, 0.5f, 0.01f);
-    
-    
+    //draw trunk here
+    //first branches
+    glTranslatef(0.5f, 0.2f, 0.0f);
+
+    tree(0.2f,3);
     
     glutSwapBuffers();
 }
@@ -86,11 +121,8 @@ void keyboard( unsigned char key, int x, int y ) {
         case '5':
         case '6':
         case '7':
-            draw_mode=key-'0';
-            glutPostRedisplay();
-            break;
         case '8':
-            draw_mode=key-'0';
+            num_branches=key-'0';
             glutPostRedisplay();
             break;
         case 27: // Escape key
@@ -117,5 +149,6 @@ int main (int argc, char *argv[]) {
     
     glutMainLoop(); //called registered disp callback
 }
+
 
 

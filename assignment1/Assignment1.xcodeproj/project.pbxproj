@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6EBE73A90B548D2E00A7F42B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBE73A80B548D2E00A7F42B /* GLUT.framework */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		D127AFFD19D9ED0C000852B9 /* tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127AFFC19D9ED0C000852B9 /* tree.cpp */; };
 		E0D3F9890F1489D30042BE7C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0D3F9880F1489D30042BE7C /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6EBE73A80B548D2E00A7F42B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		8DD76F6C0486A84900D96B5E /* Assignment1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment1; sourceTree = BUILT_PRODUCTS_DIR; };
+		D127AFFC19D9ED0C000852B9 /* tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tree.cpp; sourceTree = "<group>"; };
 		E0D3F9880F1489D30042BE7C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				D127AFFC19D9ED0C000852B9 /* tree.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				D127AFFD19D9ED0C000852B9 /* tree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
