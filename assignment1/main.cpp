@@ -12,31 +12,34 @@
 // back to the programmer?  How is this set up during
 // initialization?
 
+#define BRANCH_DECREASE 0.8;
 int win_width = 512;
 int win_height = 512;
 int num_branches = 2;
-
-#define BRANCH_DECREASE 0.8;
-#define ANGLE 0.2;
+float TREE_BASE = 0.2f;
+int MAX_DEPTH = 5;
 
 //draws the branch using triangle strips
 //creates width of strip by offseting y' from y by width
 void drawBranch(float length, float width) {
-    glPushMatrix();
-
     glBegin(GL_TRIANGLE_STRIP);
-
-    glColor3f(0.f,1.f,0.f);
     glVertex2f(0.f, 0.f);
     glVertex2f(0.f, 0.f + length);
     glVertex2f(0.f + width, 0.f);
     glVertex2f(0.f + width, 0.f + length);
     glEnd();
-    glPopMatrix();
-    
-    printf("drew");
 }
 
+//using GL_LINE_LOOP to draw the ground
+void drawGround(){
+    glColor3f(0.98f, 0.69f, .507f);
+    glBegin(GL_POLYGON);
+    glVertex2f(0.f, 0.f);
+    glVertex2d(0.f, TREE_BASE);
+    glVertex2d(win_width, TREE_BASE);
+    glVertex2d(win_width, 0.f);
+    glEnd();
+}
 
 //x and y updates with movement
 
@@ -46,26 +49,26 @@ void tree(float length, int depth)
         return;
     } else {
         float angle;
-        // Draw
-  
-        glPushMatrix();
-//        glRotatef(-90, 1.0,0.0,0.0);
-        drawBranch(length, 0.01f);
-        glPopMatrix();
+        //determine trunk/branch color
+        if (depth > (MAX_DEPTH/2)){
+            glColor3f(0.361f,0.2f,0.09f);
+        } else {
+            glColor3f(0.271f,0.545f,0.455f);
+        }
         
+        drawBranch(length, 0.01f);      //draws branch in new orientation
         glTranslatef(0.0, length, 0.0);
         
         length = length * BRANCH_DECREASE;
         depth = depth - 1;
-        //drawing 3 sets branches
-        for(int a= 0; a<3; a++){
-            angle = rand()%50+20;
-            if(angle >48) angle = -(rand()%50+20);
+
+        for(int a= 0; a < num_branches; a++){
+            angle = rand()%50+30;
+            if (angle > 48) angle = -(rand()%50+20);
             glPushMatrix();
             glRotatef(angle,1,0.0,1);
             tree(length, depth);
             glPopMatrix();
-
         }
     }
 }
@@ -75,19 +78,19 @@ void tree(float length, int depth)
 void display( void )
 {
     glClearColor(1.0, 1.0, 1.0, 1.0);   //sets clear color
-    glClearDepth(1.0);  //? what is depth
+    glClearDepth(1.0);
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //sets window to clear color
     
     //need to call these before any projection tranformations
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     
-    //draw trunk here
-    //first branches
-    glTranslatef(0.5f, 0.2f, 0.0f);
-
-    tree(0.2f,3);
+    //moving to center of screen
+    glTranslatef(0.5f, TREE_BASE, 0.0f);
+    tree(0.2f, MAX_DEPTH);
     
+    glLoadIdentity();
+    drawGround();
     glutSwapBuffers();
 }
 
@@ -114,7 +117,7 @@ void reshape( int w, int h )
 
 void keyboard( unsigned char key, int x, int y ) {
     switch(key) {
-        case '1':// Press number keys to switch the draw mode
+        case '1':
         case '2':
         case '3':
         case '4':

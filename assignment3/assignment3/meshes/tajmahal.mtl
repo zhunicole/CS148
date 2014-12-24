@@ -1,0 +1,76 @@
+
+#Ring surrounding base of the main dome
+newmtl Frise_socle.001 
+Ns 0
+Ka 0.500000 0.500000 0.500000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd MarbleTilesWall.jpg
+
+#main dome
+newmtl frise_dome.001
+Ns 0
+Ka 0.500000 0.500000 0.500000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd MarbleTilesWall.jpg
+
+#floor tiles
+newmtl Marbre_1.001
+Ns 0
+Ka 0.500000 0.500000 0.500000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd MarbleTilesWall.jpg
+
+#facade 3  
+newmtl BP.001
+Ns 0
+Ka 0.500000 0.500000 0.500000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd TajFacade.jpg
+
+#some reason changes the top too, center cube, walsl
+newmtl facade_2.001
+Ns 0
+Ka 0.500000 0.500000 0.500000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd TajFacade.jpg
+
+newmtl Cuivre_verdi.001
+Ns 0
+Ka 0.500000 0.500000 0.500000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd Plaster.jpg
+
+newmtl Socle_rotonde.001
+Ns 0
+Ka 0.500000 0.500000 0.500000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd Plaster.jpg
+

@@ -1,0 +1,44 @@
+newmtl back1
+Ka 0 0 0
+Kd 0.784314 0.784314 0.784314
+Ks 0 0 0
+illum 2
+Ns 8
+d 0.2
+
+newmtl back2
+Ka 0 0 0
+Kd 0.862745 0.862745 0.862745
+Ks 0 0 0
+illum 2
+Ns 8
+d 0.9
+
+newmtl cos2
+Ka 0 0 0
+Kd 0.192388 0.252831 0.352941
+Ks 0.0192388 0.0252831 0.0352941
+illum 2
+Ns 16
+
+newmtl cos
+Ka 0 0 0
+Kd 0.352941 0.192388 0.192388
+Ks 0.0352941 0.0192388 0.0192388
+illum 2
+Ns 16
+
+newmtl cos3
+Ka 0 0 0
+Kd 0.584097 0.780392 0.42539
+Ks 0.0584097 0.0780392 0.042539
+illum 2
+Ns 16
+
+newmtl wood
+Ka 0 0 0
+Kd 0.843137 0.711697 0.482737
+Ks 0 0 0
+illum 2
+Ns 8
+map_Kd wood.jpg

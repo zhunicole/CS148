@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C9530B2B-6455-40E0-8326-4ED28501ECE8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RayTracer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>290F04CF-4FE5-4A06-9C93-872A5E52C852</key>
+		<string>https://github.com/zhunicole/CS148.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RayTracer/raytracer/RayTracer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>290F04CF-4FE5-4A06-9C93-872A5E52C852</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/zhunicole/CS148.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>290F04CF-4FE5-4A06-9C93-872A5E52C852</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>290F04CF-4FE5-4A06-9C93-872A5E52C852</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CS148</string>
+		</dict>
+	</array>
+</dict>
+</plist>
